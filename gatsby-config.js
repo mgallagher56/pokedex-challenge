@@ -9,14 +9,28 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-material-ui',
-    'gatsby-plugin-gatsby-cloud',
+    {
+      resolve: 'gatsby-plugin-gatsby-cloud',
+      options: {
+        allPageHeaders: [
+          'Permissions-Policy: geolocation=(), midi=(), notifications=(), push=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(), payment=()'
+        ]
+      }
+    },
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        icon: 'src/images/icon.png'
+        name: 'Pokedex Challenge',
+        theme_color: '#CD5241',
+        background_color: '#EEDE7B',
+        icon: 'src/images/icon.png',
+        display: 'standalone',
+        icon_options: {
+          purpose: 'any maskable'
+        }
       }
     },
     'gatsby-plugin-sharp',
