@@ -13,7 +13,6 @@ module.exports = {
       resolve: 'gatsby-plugin-gatsby-cloud',
       options: {
         allPageHeaders: [
-          'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload',
           'Permissions-Policy: geolocation=(), midi=(), notifications=(), push=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(), payment=()'
         ]
       }
@@ -24,7 +23,14 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        icon: 'src/images/icon.png'
+        name: 'Pokedex Challenge',
+        theme_color: '#CD5241',
+        background_color: '#EEDE7B',
+        icon: 'src/images/icon.png',
+        display: 'standalone',
+        icon_options: {
+          purpose: 'any maskable'
+        }
       }
     },
     'gatsby-plugin-sharp',
