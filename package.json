@@ -15,7 +15,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "gatsby": "^3.9.0",
+    "@material-ui/core": "latest",
     "gatsby-plugin-gatsby-cloud": "^2.9.1",
     "gatsby-plugin-image": "^1.9.0",
     "gatsby-plugin-manifest": "^3.9.0",
@@ -24,9 +24,11 @@
     "gatsby-plugin-sharp": "^3.9.0",
     "gatsby-plugin-sitemap": "^4.5.0",
     "gatsby-source-filesystem": "^3.9.0",
+    "gatsby-theme-material-ui": "latest",
     "gatsby-transformer-sharp": "^3.9.0",
-    "react": "^17.0.1",
+    "gatsby": "^3.9.0",
     "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react": "^17.0.1"
   }
 }
