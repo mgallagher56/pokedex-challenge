@@ -9,7 +9,15 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-material-ui',
-    'gatsby-plugin-gatsby-cloud',
+    {
+      resolve: 'gatsby-plugin-gatsby-cloud',
+      options: {
+        allPageHeaders: [
+          'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload',
+          'Permissions-Policy: geolocation=(), midi=(), notifications=(), push=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(), payment=()'
+        ]
+      }
+    },
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
