@@ -16,12 +16,13 @@ const gqlQuery = `query pokemons($limit: Int, $offset: Int) {
       url
       name
       image
+      id
     }
   }
 }`
 
 const gqlVariables = {
-  limit: 152,
+  limit: 151,
   offset: 0
 }
 
@@ -39,9 +40,9 @@ exports.sourceNodes = async ({
     method: 'POST'
   })
   const resultData = await result.json()
+  const pokemons = resultData.data.pokemons.results
   createNode({
-    pokeName: resultData,
-    url: resultData,
+    pokemons: pokemons,
     id: 'example-build-time-data',
     parent: null,
     children: [],

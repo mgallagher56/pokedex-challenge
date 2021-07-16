@@ -5,7 +5,9 @@ require('dotenv').config({
 module.exports = {
   siteMetadata: {
     siteUrl: process.env.URL,
-    title: 'pokedex-challenge'
+    title: 'Marc\'s Pokedex',
+    description: 'A list of Pokemon and their information',
+    lang: 'en'
   },
   plugins: [
     'gatsby-plugin-material-ui',
