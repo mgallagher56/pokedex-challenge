@@ -1,32 +1,101 @@
 import * as React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
+import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container'
+// import Link from '@material-ui/core/Link'
+
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    marginRight: theme.spacing(2)
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6)
+  },
+  heroButtons: {
+    marginTop: theme.spacing(4)
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8)
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  cardTitle: {
+    textTransform: 'capitalize'
+  },
+  cardMedia: {
+    paddingTop: '56.25%'
+  },
+  cardContent: {
+    flexGrow: 1
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6)
+  }
+}))
 
 const ListPokemons = () => {
-  return (
-    <StaticQuery
-      query={graphql`
-        query PokemonQuery {
-          pokemonData {
-            pokemons {
+  const { pokemonData } = useStaticQuery(
+    graphql`
+      query {
+        pokemonData {
+          pokemons {
               name,
               image,
               url,
               id
-            }
           }
         }
-      `}
-      render={data => (
-        data.pokemonData.pokemons.map(pokemon => {
-          console.log(pokemon)
+      }
+    `
+  )
+
+  const classes = useStyles()
+  return (
+    <Container className={classes.cardGrid} maxWidth='md'>
+      <Grid container spacing={4}>
+        {pokemonData.pokemons.map(pokemon => {
           return (
-            <div key={pokemon.id}>
-              <h1>{pokemon.name}</h1>
-            </div>
+            <React.Fragment key={pokemon.id}>
+              <Grid item xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image={pokemon.image}
+                    title='Image title'
+                  />
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant='h5' component='h2' className={classes.cardTitle}>
+                      {pokemon.name}
+                    </Typography>
+                    <Typography>
+                      {pokemon.url}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size='large' color='primary'>
+                      View
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            </React.Fragment>
           )
-        })
-      )}
-    />
+        })}
+      </Grid>
+    </Container>
   )
 }
 export default ListPokemons
