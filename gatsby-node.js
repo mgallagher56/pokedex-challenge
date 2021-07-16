@@ -4,7 +4,7 @@ exports.sourceNodes = async ({
   actions: { createNode },
   createContentDigest
 }) => {
-  FetchPaginatedPokemon()
+  await FetchPaginatedPokemon()
     .then(pokemons => {
       createNode({
         pokemons: pokemons,
@@ -19,17 +19,17 @@ exports.sourceNodes = async ({
     })
 }
 
-const FetchPaginatedPokemon = async () => {
-  const pokeObj = { page: {} }
+const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
+  const pokeArr = []
   let offset = 0
-
-  for (let i = 0; i < 8; i++) {
-    await asyncFetch(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`)
-      .then(async allPokemon => {
-        await allPokemon.results.forEach(pokemon => {
+  let url = `https://pokeapi.co/api/v2/pokemon?limit=${pokemonPerPage}&offset=${offset}`
+  for (let i = 0; i < pageQuantity; i++) {
+    await asyncFetch(url)
+      .then(allPokemon => {
+        allPokemon.results.forEach(pokemon => {
           asyncFetch(pokemon.url)
-            .then(async pokemonDetail => {
-              await asyncFetch(pokemonDetail.species.url)
+            .then(pokemonDetail => {
+              asyncFetch(pokemonDetail.species.url)
                 .then(species => {
                   pokemon.id = pokemonDetail.id
                   pokemon.image = pokemonDetail.sprites.other['official-artwork'].front_default
@@ -47,16 +47,16 @@ const FetchPaginatedPokemon = async () => {
                 })
             })
         })
-        pokeObj.page['page-' + i] = allPokemon
+        pokeArr.push(allPokemon)
+        url = allPokemon.next
       })
-    offset += 20
-    pokeObj.page['page-' + i].id = i
+    offset += pokemonPerPage
   }
-  return pokeObj
+  return pokeArr
 }
 
 async function asyncFetch(url) {
   let result = await fetch(url)
-  result = await result.json()
+  result = result.json()
   return result
 }
