@@ -17,7 +17,8 @@ module.exports = {
         allPageHeaders: [
           'Cache-Control: max-age=31536000',
           'Permissions-Policy: geolocation=(), midi=(), notifications=(), push=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(), payment=()'
-        ]
+        ],
+        mergeCachingHeaders: true
       }
     },
     'gatsby-plugin-image',
