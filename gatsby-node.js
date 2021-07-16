@@ -1,22 +1,60 @@
 const fetch = require('node-fetch')
+const path = require('path')
 
 exports.sourceNodes = async ({
-  actions: { createNode },
+  actions: { createNode, createPage },
   createContentDigest
 }) => {
   await FetchPaginatedPokemon()
-    .then(pokemons => {
+    .then(pokemonData => {
       createNode({
-        pokemons: pokemons,
+        nodes: pokemonData,
         id: 'pokemon-list',
         parent: null,
         children: [],
         internal: {
           type: 'pokemonData',
-          contentDigest: createContentDigest(pokemons)
+          contentDigest: createContentDigest(pokemonData)
         }
       })
     })
+}
+
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions
+  const PageTemplate = path.resolve('./src/templates/PokemonDetail.jsx')
+
+  const result = await graphql(
+    `
+      query pokemonList {
+        pokemonData {
+          nodes {
+            results {
+              name
+              id
+              image
+            }
+          }
+        }
+      }
+    `
+  )
+
+  if (result.errors) {
+    reporter.panicOnBuild('Error while running GraphQL query.')
+    return
+  }
+
+  result.data.pokemonData.nodes.map(page => {
+    page.results.map(pokemon => {
+      createPage({
+        path: `/pokemon/${pokemon.name}`,
+        component: PageTemplate
+      })
+      return null
+    })
+    return null
+  })
 }
 
 const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
@@ -44,6 +82,8 @@ const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
                   } else {
                     pokemon.description = species.flavor_text_entries[2].flavorr_text
                   }
+                }).catch(err => {
+                  console.error(err);
                 })
             })
         })
