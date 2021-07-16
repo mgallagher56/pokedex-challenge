@@ -19,9 +19,11 @@ function Seo ({ metaDescription, meta, lang, title }) {
 
   const defaultTitle = site.siteMetadata?.title
 
+  console.log(site.siteMetadata.lang)
+
   return (
     <Helmet
-      html={{ lang: lang || site.siteMetadata.lang }}
+      htmlAttributes={{ lang: lang || site.siteMetadata.lang }}
       title={title || site.siteMetadata.title}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
       meta={[
