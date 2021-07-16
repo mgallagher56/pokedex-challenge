@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
+import Pagination from '@material-ui/lab/Pagination'
 // import Link from '@material-ui/core/Link'
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'capitalize'
   },
   cardMedia: {
-    paddingTop: '56.25%'
+    paddingTop: '100%'
   },
   cardContent: {
     flexGrow: 1
@@ -49,52 +50,58 @@ const useStyles = makeStyles((theme) => ({
 const ListPokemons = () => {
   const { pokemonData } = useStaticQuery(
     graphql`
-      query {
-        pokemonData {
-          pokemons {
-              name,
-              image,
-              url,
-              id
+    query pokemonList {
+      pokemonData {
+        pokemons {
+          results {
+            name
+            id
+            image
           }
         }
       }
+    }
     `
   )
+
+  console.log(pokemonData)
 
   const classes = useStyles()
   return (
     <Container className={classes.cardGrid} maxWidth='md'>
       <Grid container spacing={4}>
-        {pokemonData.pokemons.map(pokemon => {
+        {pokemonData.pokemons.map(page => {
           return (
-            <React.Fragment key={pokemon.id}>
-              <Grid item xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image={pokemon.image}
-                    title='Image title'
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant='h5' component='h2' className={classes.cardTitle}>
-                      {pokemon.name}
-                    </Typography>
-                    <Typography>
-                      {pokemon.url}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size='large' color='primary'>
-                      View
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            </React.Fragment>
+            page.results.map(pokemon => {
+              console.log(pokemon)
+              return (
+                <React.Fragment key={pokemon.id}>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Card className={classes.card}>
+                      <CardMedia
+                        className={classes.cardMedia}
+                        image={pokemon.image}
+                        title='Image title'
+                      />
+                      <CardContent className={classes.cardContent}>
+                        <Typography gutterBottom variant='h4' component='h4' className={classes.cardTitle}>
+                          {pokemon.name}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button color='primary'>
+                          View details
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                </React.Fragment>
+              )
+            })
           )
         })}
       </Grid>
+      <Pagination count={10} color='secondary' />
     </Container>
   )
 }
