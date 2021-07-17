@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 const path = require('path')
 
 exports.sourceNodes = async ({
-  actions: { createNode, createPage },
+  actions: { createNode },
   createContentDigest
 }) => {
   await FetchPaginatedPokemon()
@@ -31,8 +31,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           nodes {
             results {
               name
-              id
-              image
             }
           }
         }
@@ -70,7 +68,10 @@ const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
               asyncFetch(pokemonDetail.species.url)
                 .then(species => {
                   pokemon.id = pokemonDetail.id
-                  pokemon.image = pokemonDetail.sprites.other['official-artwork'].front_default
+                  pokemon.image = {
+                    id: `image-${pokemonDetail.id}`,
+                    url: pokemonDetail.sprites.other['official-artwork'].front_default
+                  }
                   pokemon.types = pokemonDetail.types
                   pokemon.weight = pokemonDetail.weight
                   pokemon.height = pokemonDetail.height

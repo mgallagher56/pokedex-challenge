@@ -36,7 +36,8 @@
     "gatsby-transformer-sharp": "^3.9.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "use-debounce": "^7.0.0"
   },
   "devDependencies": {
     "@testing-library/cypress": "^7.0.6",
