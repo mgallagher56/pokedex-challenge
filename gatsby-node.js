@@ -79,7 +79,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 }
 
-const fetchPaginatedPokemon = async (pokemonPerPage = 20, noOfPages = 10) => {
+const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 15) => {
   const pokeArr = []
   let offset = 0
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${pokemonPerPage}&offset=${offset}`
@@ -107,7 +107,7 @@ const fetchPaginatedPokemon = async (pokemonPerPage = 20, noOfPages = 10) => {
         })
         pokeArr.push(allPokemon)
         url = allPokemon.next
-      })
+      }).catch(err => { console.error(err) })
     offset += pokemonPerPage
   }
   return pokeArr
