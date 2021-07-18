@@ -1,23 +1,52 @@
 const fetch = require('node-fetch')
+const { createRemoteFileNode } = require('gatsby-source-filesystem')
 const path = require('path')
 
 exports.sourceNodes = async ({
-  actions: { createNode, createPage },
+  actions,
+  createNodeId,
   createContentDigest
 }) => {
-  await FetchPaginatedPokemon()
-    .then(pokemonData => {
-      createNode({
-        nodes: pokemonData,
-        id: 'pokemon-list',
+  const NODE_TYPE = 'Pokemon'
+
+  const response = await fetchPaginatedPokemon()
+  response.forEach(page => {
+    page.results.forEach(pokemon => {
+      actions.createNode({
+        ...pokemon,
+        id: createNodeId(`${NODE_TYPE}-${pokemon.id}`),
         parent: null,
         children: [],
         internal: {
-          type: 'pokemonData',
-          contentDigest: createContentDigest(pokemonData)
+          type: NODE_TYPE,
+          contentDigest: createContentDigest(pokemon)
         }
       })
     })
+  })
+}
+
+exports.onCreateNode = async ({
+  node,
+  actions: { createNode },
+  createNodeId,
+  getCache
+}) => {
+  if (node.internal.type === 'Pokemon') {
+    if (typeof node.image !== 'undefined') {
+      const fileNode = await createRemoteFileNode({
+        url: node.image,
+        parentNodeId: node.id,
+        createNode,
+        createNodeId,
+        getCache
+      })
+
+      if (fileNode) {
+        node.remoteImage___NODE = fileNode.id
+      }
+    }
+  }
 }
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
@@ -27,11 +56,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(
     `
       query pokemonList {
-        pokemonData {
+        allPokemon {
           nodes {
-            results {
-              name
-            }
+            name
           }
         }
       }
@@ -43,38 +70,30 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  result.data.pokemonData.nodes.map(page => {
-    page.results.map(pokemon => {
-      createPage({
-        path: `/pokemon/${pokemon.name}`,
-        component: PageTemplate
-      })
-      return null
+  result.data.allPokemon.nodes.forEach(pokemon => {
+    createPage({
+      path: `/pokemon/${pokemon.name}`,
+      component: PageTemplate
     })
     return null
   })
 }
 
-const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
+const fetchPaginatedPokemon = async (pokemonPerPage = 20, noOfPages = 10) => {
   const pokeArr = []
   let offset = 0
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${pokemonPerPage}&offset=${offset}`
-  for (let i = 0; i < pageQuantity; i++) {
-    await asyncFetch(url)
+  for (let i = 0; i < noOfPages; i++) {
+    await asyncFetch(url).catch(err => { console.error(err) })
+
       .then(allPokemon => {
-        allPokemon.results.forEach(pokemon => {
-          asyncFetch(pokemon.url)
-            .then(pokemonDetail => {
-              asyncFetch(pokemonDetail.species.url)
+        allPokemon.results.forEach(async pokemon => {
+          await asyncFetch(pokemon.url).catch(err => { console.error(err) })
+            .then(async pokemonDetail => {
+              await asyncFetch(pokemonDetail.species.url).catch(err => { console.error(err) })
                 .then(species => {
-                  pokemon.id = pokemonDetail.id
-                  pokemon.image = {
-                    id: `image-${pokemonDetail.id}`,
-                    url: pokemonDetail.sprites.other['official-artwork'].front_default
-                  }
-                  pokemon.types = pokemonDetail.types
-                  pokemon.weight = pokemonDetail.weight
-                  pokemon.height = pokemonDetail.height
+                  pokemon.pokemonId = pokemonDetail.id
+                  pokemon.image = pokemonDetail.sprites.other['official-artwork'].front_default
 
                   if (species.flavor_text_entries[0].language.name === 'en') {
                     pokemon.description = species.flavor_text_entries[0].flavor_text
@@ -83,8 +102,6 @@ const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
                   } else {
                     pokemon.description = species.flavor_text_entries[2].flavorr_text
                   }
-                }).catch(err => {
-                  console.error(err);
                 })
             })
         })
@@ -96,8 +113,8 @@ const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
   return pokeArr
 }
 
-async function asyncFetch(url) {
+async function asyncFetch (url) {
   let result = await fetch(url)
-  result = result.json()
+  result = await result.json()
   return result
 }
