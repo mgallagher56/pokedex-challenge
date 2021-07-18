@@ -71,33 +71,20 @@ const useStyles = makeStyles((theme) => ({
 
 // query
 const ListPokemon = () => {
-  const { pokemonData } = useStaticQuery(
-    graphql`
-    query pokemonList {
-      pokemonData {
-        nodes {
-          results {
-            name
-            id
-            image {
-              url
-            }
-          }
-        }
+  const data = useStaticQuery(graphql`
+  query PokemonQuery {
+    allPokemon {
+      nodes {
+        name
+        id
+        image
       }
     }
-    `
-  )
+  }
+`)
 
+  const allPokemon = data.allPokemon.nodes
   const itemsPerPage = 20
-  const allPokemon = []
-  pokemonData.nodes.map(page => {
-    page.results.map(pokemon => {
-      return allPokemon.push(pokemon)
-    })
-    return allPokemon
-  })
-
   const initialPagePokemon = allPokemon.slice(0, itemsPerPage)
 
   const numberOfPages = (items) => {
@@ -157,7 +144,6 @@ const ListPokemon = () => {
     }
   }
 
-
   const resetSearchHandler = () => {
     resetCards()
     document.getElementById('pokemon-search').value = ''
@@ -208,12 +194,12 @@ const ListPokemon = () => {
           const { id, name, image } = pokemon
           return (
             <React.Fragment key={id}>
-              <Grid id={pokemon.name} item xs={12} sm={4} md={3}>
+              <Grid id={name} item xs={12} sm={4} md={3}>
                 <Link to={`/pokemon/${name}`}>
                   <Card className={card}>
                     <CardMedia
                       className={cardMedia}
-                      image={image.url}
+                      image={image}
                       title='Image title'
                     />
                     <CardContent className={cardContent}>
