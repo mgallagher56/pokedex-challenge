@@ -11,7 +11,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
-import { TextField } from '@material-ui/core'
+import { CardMedia, TextField } from '@material-ui/core'
 import Pagination from '@material-ui/lab/Pagination'
 
 // styles
@@ -73,6 +73,7 @@ const ListPokemon = () => {
       nodes {
         name
         id
+        image
         remoteImage {
           childImageSharp {
             gatsbyImageData(
@@ -196,19 +197,27 @@ const ListPokemon = () => {
         : null}
       <Grid container spacing={4}>
         {state.pokemonToShow.map(pokemon => {
-          const { id, name } = pokemon
-          const image = getImage(pokemon.remoteImage)
+          const { id, name, image } = pokemon
+          const gatsbyImg = getImage(pokemon.remoteImage)
           return (
             <React.Fragment key={id}>
               <Grid id={name} item xs={12} sm={4} md={3}>
                 <Link to={`/pokemon/${name}`}>
                   <Card className={card}>
-                    <GatsbyImage
-                      objectFit='contain'
-                      className={cardMedia}
-                      image={image}
-                      title='Image title'
-                    />
+                    {gatsbyImg
+                      ? <GatsbyImage
+                          objectFit='contain'
+                          className={cardMedia}
+                          image={gatsbyImg}
+                          title={name}
+                          alt={name}
+                        />
+                      : <CardMedia
+                          className={cardMedia}
+                          image={image}
+                          title={name}
+                          alt={name}
+                        />}
                     <CardContent className={cardContent}>
                       <Typography variant='h5' component='h5' className={cardTitle}>
                         {name}
