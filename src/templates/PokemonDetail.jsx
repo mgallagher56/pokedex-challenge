@@ -10,9 +10,6 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme) => ({
   appBar: {
     width: '100%',
-    position: 'absolute',
-    top: 0,
-    left: 0,
     paddingBottom: theme.spacing(2),
     paddingTop: theme.spacing(2)
   },
@@ -25,10 +22,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const PokemonDetail = ({ data }) => {
-  const { appBar, title, button, card } = useStyles()
-  console.log(data)
+  const { appBar, title, button } = useStyles()
   const { name, remoteImage, image, description, pokemonNumber } = data.allPokemon.nodes[0]
-  const gatsbyImg = remoteImage.childImageSharp.gatsbyImageData
+  const gatsbyImg = getImage(remoteImage)
   return (
     <main>
       <Seo />

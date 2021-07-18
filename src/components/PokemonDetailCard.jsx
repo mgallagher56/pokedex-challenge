@@ -38,6 +38,7 @@ const PokemonDetailCard = (props) => {
     <Card className={card}>
       {props.gatsbyImg
         ? <GatsbyImage
+            objectFit='contain'
             className={cardMedia}
             image={props.gatsbyImg}
             title={props.title}
