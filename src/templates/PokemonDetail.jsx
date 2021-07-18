@@ -5,7 +5,6 @@ import { getImage } from 'gatsby-plugin-image'
 import Seo from '../components/Seo'
 import { Container } from '@material-ui/core'
 import PokemonDetailCard from '../components/PokemonDetailCard'
-import { makeStyles } from '@material-ui/core/styles'
 import SimplifiedHeader from '../components/SimpleHeader'
 
 const PokemonDetail = ({ data }) => {
