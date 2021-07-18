@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    marginTop: theme.spacing(15)
+    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)'
   },
   cardTitle: {
     textTransform: 'capitalize'
