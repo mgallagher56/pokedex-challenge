@@ -50,7 +50,15 @@ exports.onCreateNode = async ({
 }
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions
+  const { createPage, createRedirect } = actions
+
+  createRedirect({
+    fromPath: '/pokemon/',
+    toPath: '/',
+    isPermanent: true,
+    redirectInBrowser: true
+  })
+
   const PageTemplate = path.resolve('./src/templates/PokemonDetail.jsx')
 
   const result = await graphql(
@@ -73,7 +81,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   result.data.allPokemon.nodes.forEach(pokemon => {
     createPage({
       path: `/pokemon/${pokemon.name}`,
-      component: PageTemplate
+      component: PageTemplate,
+      context: {
+        name: pokemon.name
+      }
     })
     return null
   })
@@ -91,6 +102,7 @@ const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 15) => 
             .then(pokemonDetail => {
               asyncFetch(pokemonDetail.species.url)
                 .then(species => {
+                  pokemon.pokemonNumber = pokemonDetail.id
                   pokemon.id = pokemonDetail.id
                   pokemon.image = pokemonDetail.sprites.other['official-artwork'].front_default
 
