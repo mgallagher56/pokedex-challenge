@@ -56,7 +56,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(
     `
       query pokemonList {
-        allPokemon {
+        allPokemon(limit: 151) {
           nodes {
             name
           }
@@ -79,20 +79,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 }
 
-const fetchPaginatedPokemon = async (pokemonPerPage = 20, noOfPages = 10) => {
+const fetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 15) => {
   const pokeArr = []
   let offset = 0
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${pokemonPerPage}&offset=${offset}`
-  for (let i = 0; i < noOfPages; i++) {
-    await asyncFetch(url).catch(err => { console.error(err) })
-
+  for (let i = 0; i < pageQuantity; i++) {
+    await asyncFetch(url)
       .then(allPokemon => {
-        allPokemon.results.forEach(async pokemon => {
-          await asyncFetch(pokemon.url).catch(err => { console.error(err) })
-            .then(async pokemonDetail => {
-              await asyncFetch(pokemonDetail.species.url).catch(err => { console.error(err) })
+        allPokemon.results.forEach(pokemon => {
+          asyncFetch(pokemon.url)
+            .then(pokemonDetail => {
+              asyncFetch(pokemonDetail.species.url)
                 .then(species => {
-                  pokemon.pokemonId = pokemonDetail.id
+                  pokemon.id = pokemonDetail.id
                   pokemon.image = pokemonDetail.sprites.other['official-artwork'].front_default
 
                   if (species.flavor_text_entries[0].language.name === 'en') {
@@ -107,14 +106,14 @@ const fetchPaginatedPokemon = async (pokemonPerPage = 20, noOfPages = 10) => {
         })
         pokeArr.push(allPokemon)
         url = allPokemon.next
-      })
+      }).catch(err => { console.error(err) })
     offset += pokemonPerPage
   }
   return pokeArr
 }
 
-async function asyncFetch (url) {
+async function asyncFetch(url) {
   let result = await fetch(url)
-  result = await result.json()
+  result = result.json()
   return result
 }
