@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { useDebouncedCallback } from 'use-debounce'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -7,7 +8,6 @@ import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
@@ -43,11 +43,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'capitalize'
   },
   cardMedia: {
-    paddingTop: '100%',
     [theme.breakpoints.down('xs')]: {
-      backgroundSize: 'contain',
-      height: '100px',
-      paddingTop: '0',
       width: '33%'
     }
   },
@@ -77,7 +73,15 @@ const ListPokemon = () => {
       nodes {
         name
         id
-        image
+        remoteImage {
+          childImageSharp {
+            gatsbyImageData(
+              formats: [WEBP, AVIF, AUTO]
+              placeholder: TRACED_SVG
+              tracedSVGOptions: {background: "#1B8FD3", color: "#FF6F58"}
+            )
+          }
+        }
       }
     }
   }
@@ -191,13 +195,15 @@ const ListPokemon = () => {
         : null}
       <Grid container spacing={4}>
         {state.pokemonToShow.map(pokemon => {
-          const { id, name, image } = pokemon
+          const { id, name } = pokemon
+          const image = getImage(pokemon.remoteImage)
           return (
             <React.Fragment key={id}>
               <Grid id={name} item xs={12} sm={4} md={3}>
                 <Link to={`/pokemon/${name}`}>
                   <Card className={card}>
-                    <CardMedia
+                    <GatsbyImage
+                      objectFit='contain'
                       className={cardMedia}
                       image={image}
                       title='Image title'
