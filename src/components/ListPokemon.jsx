@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 const ListPokemon = () => {
   const data = useStaticQuery(graphql`
   query PokemonQuery {
-    allPokemon {
+    allPokemon(limit: 151) {
       nodes {
         name
         id
