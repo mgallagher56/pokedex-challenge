@@ -92,10 +92,7 @@ const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
               asyncFetch(pokemonDetail.species.url)
                 .then(species => {
                   pokemon.id = pokemonDetail.id
-                  pokemon.image = {
-                    id: `image-${pokemonDetail.id}`,
-                    url: pokemonDetail.sprites.other['official-artwork'].front_default
-                  }
+                  pokemon.image = pokemonDetail.sprites.other['official-artwork'].front_default
                   pokemon.types = pokemonDetail.types
                   pokemon.weight = pokemonDetail.weight
                   pokemon.height = pokemonDetail.height
