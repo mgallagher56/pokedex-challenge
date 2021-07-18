@@ -76,6 +76,7 @@ const ListPokemon = () => {
         remoteImage {
           childImageSharp {
             gatsbyImageData(
+              width: 200
               formats: [WEBP, AVIF, AUTO]
               placeholder: TRACED_SVG
               tracedSVGOptions: {background: "#1B8FD3", color: "#FF6F58"}

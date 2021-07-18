@@ -79,7 +79,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 }
 
-const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
+const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 15) => {
   const pokeArr = []
   let offset = 0
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${pokemonPerPage}&offset=${offset}`
@@ -93,9 +93,6 @@ const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
                 .then(species => {
                   pokemon.id = pokemonDetail.id
                   pokemon.image = pokemonDetail.sprites.other['official-artwork'].front_default
-                  pokemon.types = pokemonDetail.types
-                  pokemon.weight = pokemonDetail.weight
-                  pokemon.height = pokemonDetail.height
 
                   if (species.flavor_text_entries[0].language.name === 'en') {
                     pokemon.description = species.flavor_text_entries[0].flavor_text
@@ -104,14 +101,12 @@ const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
                   } else {
                     pokemon.description = species.flavor_text_entries[2].flavorr_text
                   }
-                }).catch(err => {
-                  console.error(err)
                 })
             })
         })
         pokeArr.push(allPokemon)
         url = allPokemon.next
-      })
+      }).catch(err => { console.error(err) })
     offset += pokemonPerPage
   }
   return pokeArr
