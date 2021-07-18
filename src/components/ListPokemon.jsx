@@ -17,7 +17,7 @@ import Pagination from '@material-ui/lab/Pagination'
 // styles
 const useStyles = makeStyles((theme) => ({
   input: {
-    paddingBottom: theme.spacing(8),
+    marginBottom: theme.spacing(8),
     width: '100%'
   },
   cardGrid: {
@@ -88,17 +88,42 @@ const ListPokemon = () => {
     }
     `
   )
-  const paginatedResults = pokemonData.nodes
+
+  const itemsPerPage = 20
   const allPokemon = []
-  paginatedResults.map(page => {
+  pokemonData.nodes.map(page => {
     page.results.map(pokemon => {
       return allPokemon.push(pokemon)
     })
     return allPokemon
   })
 
-  const filterPokemonList = (searchValue, allPokemonList) => {
-    return allPokemonList.filter((pokemon) => {
+  const initialPagePokemon = allPokemon.slice(0, itemsPerPage)
+
+  const numberOfPages = (items) => {
+    return Math.ceil(items.length / itemsPerPage)
+  }
+
+  const [state, setState] = useState({
+    searchInput: '',
+    searchedPokemon: [],
+    totalPages: numberOfPages(allPokemon),
+    currentPage: 1,
+    pokemonToShow: initialPagePokemon
+  })
+
+  const resetCards = () => {
+    setState({
+      searchInput: '',
+      searchedPokemon: [],
+      totalPages: numberOfPages(allPokemon),
+      currentPage: 1,
+      pokemonToShow: initialPagePokemon
+    })
+  }
+
+  const searchPokemon = (searchValue) => {
+    return allPokemon.filter((pokemon) => {
       if (pokemon.name.includes(searchValue)) {
         return pokemon
       }
@@ -106,27 +131,40 @@ const ListPokemon = () => {
     })
   }
 
-  const numberOfPages = (pokemonList) => {
-    const pokemonNum = pokemonList.length
-    return pokemonNum % 20 === 0 ? pokemonNum / 20 : (pokemonNum / 20) + 1
+  const handlePageChange = (page) => {
+    const offset = (page - 1) * itemsPerPage
+
+    const pokemonList = state.searchInput === ''
+      ? allPokemon
+      : state.searchedPokemon
+
+    return pokemonList.slice(offset).slice(0, itemsPerPage)
   }
 
-  const [filteredPokemon, setFilteredPokemon] = useState(allPokemon)
-  const [pages, setPages] = useState(numberOfPages(allPokemon))
-
-  const filterPokemonCards = (filterValue) => {
-    const filteredPokemon = filterPokemonList(filterValue, allPokemon)
-    setFilteredPokemon(filteredPokemon)
-    setPages(numberOfPages(filteredPokemon))
+  const searchPokemonCards = (searchValue) => {
+    if (searchValue === '') {
+      resetCards()
+    } else {
+      const pokemonSearchResults = searchPokemon(searchValue)
+      setState({
+        ...state,
+        searchInput: searchValue,
+        searchedPokemon: pokemonSearchResults,
+        totalPages: numberOfPages(pokemonSearchResults),
+        currentPage: 1,
+        pokemonToShow: pokemonSearchResults.slice(0).slice(0, itemsPerPage)
+      })
+    }
   }
+
 
   const resetSearchHandler = () => {
-    filterPokemonCards('')
+    resetCards()
     document.getElementById('pokemon-search').value = ''
   }
 
   const debounceFilter = useDebouncedCallback((value) => {
-    filterPokemonCards(value)
+    searchPokemonCards(value)
   }, 150)
 
   const {
@@ -150,7 +188,7 @@ const ListPokemon = () => {
         type='search'
         onChange={(e) => debounceFilter(e.target.value)}
       />
-      {pages === 0
+      {state.pokemonToShow.length === 0
         ? <div className={searchError}>
           <Typography variant='h5' component='h5' className={searchError}>
             Opps! Looks like your search didn't catch any Pokemon
@@ -166,7 +204,7 @@ const ListPokemon = () => {
         </div>
         : null}
       <Grid container spacing={4}>
-        {filteredPokemon.map(pokemon => {
+        {state.pokemonToShow.map(pokemon => {
           const { id, name, image } = pokemon
           return (
             <React.Fragment key={id}>
@@ -195,8 +233,18 @@ const ListPokemon = () => {
           )
         })}
       </Grid>
-      {pages !== 0
-        ? <Pagination className={pagination} count={pages} color='secondary' />
+      {state.totalPages !== 0
+        ? <Pagination
+            className={pagination}
+            count={state.totalPages}
+            page={state.currentPage}
+            color='secondary'
+            onChange={(e, page) => setState({
+              ...state,
+              currentPage: page,
+              pokemonToShow: handlePageChange(page)
+            })}
+          />
         : null}
     </Container>
   )
