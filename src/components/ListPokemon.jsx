@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
-import { useStaticQuery, graphql, Link } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { useStaticQuery, graphql } from 'gatsby'
+import { getImage } from 'gatsby-plugin-image'
 import { useDebouncedCallback } from 'use-debounce'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
-import { CardMedia, TextField } from '@material-ui/core'
+import { TextField } from '@material-ui/core'
 import Pagination from '@material-ui/lab/Pagination'
+import PokemonCard from './PokemonCard'
 
 // styles
 const useStyles = makeStyles((theme) => ({
@@ -23,34 +21,6 @@ const useStyles = makeStyles((theme) => ({
   cardGrid: {
     paddingBottom: theme.spacing(8),
     paddingTop: theme.spacing(8)
-  },
-  card: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    transition: 'all .3s ease-out',
-    transitionProperty: 'box-shadow, transform',
-    '&:hover': {
-      boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
-      transform: 'translate3d(0px, -2px, 0px)'
-    },
-    [theme.breakpoints.down('xs')]: {
-      flexDirection: 'row',
-      maxHeight: '100px'
-    }
-  },
-  cardTitle: {
-    textTransform: 'capitalize'
-  },
-  cardMedia: {
-    [theme.breakpoints.down('xs')]: {
-      width: '33%'
-    }
-  },
-  cardContent: {
-    flexGrow: 1,
-    display: 'flex',
-    alignItems: 'center'
   },
   pagination: {
     display: 'flex',
@@ -162,10 +132,6 @@ const ListPokemon = () => {
   const {
     input,
     cardGrid,
-    card,
-    cardTitle,
-    cardMedia,
-    cardContent,
     pagination,
     searchError
   } = useStyles()
@@ -202,34 +168,13 @@ const ListPokemon = () => {
           return (
             <React.Fragment key={id}>
               <Grid id={name} item xs={12} sm={4} md={3}>
-                <Link to={`/pokemon/${name}`}>
-                  <Card className={card}>
-                    {gatsbyImg
-                      ? <GatsbyImage
-                          objectFit='contain'
-                          className={cardMedia}
-                          image={gatsbyImg}
-                          title={name}
-                          alt={name}
-                        />
-                      : <CardMedia
-                          className={cardMedia}
-                          image={image}
-                          title={name}
-                          alt={name}
-                        />}
-                    <CardContent className={cardContent}>
-                      <Typography variant='h5' component='h5' className={cardTitle}>
-                        {name}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button color='primary'>
-                        View details
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Link>
+                <PokemonCard
+                  link={`/pokemon/${name}`}
+                  gatsbyImg={gatsbyImg}
+                  fallbackImg={image}
+                  title={name}
+                  btnText='View details'
+                />
               </Grid>
             </React.Fragment>
           )
