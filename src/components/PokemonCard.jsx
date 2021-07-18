@@ -38,7 +38,10 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'left',
+    [theme.breakpoints.down('xs')]: {
+      alignItems: 'center'
+    }
   }
 }))
 
@@ -47,7 +50,8 @@ const PokemonCard = (props) => {
     card,
     cardTitle,
     cardMedia,
-    cardContent
+    cardContent,
+    cardActions
   } = useStyles()
 
   return (
@@ -71,12 +75,15 @@ const PokemonCard = (props) => {
           <Typography variant='h5' component='h5' className={cardTitle}>
             {props.title}
           </Typography>
+          <Typography variant='body1' component='p'>
+            {props.description}
+          </Typography>
         </CardContent>
-        <CardActions>
-          <Button color='primary'>
-            {props.btnText}
-          </Button>
-        </CardActions>
+        {props.btnText
+          ? <CardActions className={cardActions}>
+              <Button color='primary'>{props.btnText}</Button>
+            </CardActions>
+          : null}
       </Card>
     </Link>
   )
