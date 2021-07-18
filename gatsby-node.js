@@ -9,7 +9,7 @@ exports.sourceNodes = async ({
 }) => {
   const NODE_TYPE = 'Pokemon'
 
-  const response = await FetchPaginatedPokemon()
+  const response = await fetchPaginatedPokemon()
   response.forEach(page => {
     page.results.forEach(pokemon => {
       actions.createNode({
@@ -79,23 +79,21 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 }
 
-const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
+const fetchPaginatedPokemon = async (pokemonPerPage = 20, noOfPages = 10) => {
   const pokeArr = []
   let offset = 0
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${pokemonPerPage}&offset=${offset}`
-  for (let i = 0; i < pageQuantity; i++) {
-    await asyncFetch(url)
+  for (let i = 0; i < noOfPages; i++) {
+    await asyncFetch(url).catch(err => { console.error(err) })
+
       .then(allPokemon => {
-        allPokemon.results.forEach(pokemon => {
-          asyncFetch(pokemon.url)
-            .then(pokemonDetail => {
-              asyncFetch(pokemonDetail.species.url)
+        allPokemon.results.forEach(async pokemon => {
+          await asyncFetch(pokemon.url).catch(err => { console.error(err) })
+            .then(async pokemonDetail => {
+              await asyncFetch(pokemonDetail.species.url).catch(err => { console.error(err) })
                 .then(species => {
-                  pokemon.id = pokemonDetail.id
+                  pokemon.pokemonId = pokemonDetail.id
                   pokemon.image = pokemonDetail.sprites.other['official-artwork'].front_default
-                  pokemon.types = pokemonDetail.types
-                  pokemon.weight = pokemonDetail.weight
-                  pokemon.height = pokemonDetail.height
 
                   if (species.flavor_text_entries[0].language.name === 'en') {
                     pokemon.description = species.flavor_text_entries[0].flavor_text
@@ -104,8 +102,6 @@ const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
                   } else {
                     pokemon.description = species.flavor_text_entries[2].flavorr_text
                   }
-                }).catch(err => {
-                  console.error(err)
                 })
             })
         })
@@ -117,8 +113,8 @@ const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 8) => {
   return pokeArr
 }
 
-async function asyncFetch(url) {
+async function asyncFetch (url) {
   let result = await fetch(url)
-  result = result.json()
+  result = await result.json()
   return result
 }
