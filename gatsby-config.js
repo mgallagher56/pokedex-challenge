@@ -15,7 +15,7 @@ module.exports = {
       resolve: 'gatsby-plugin-gatsby-cloud',
       options: {
         allPageHeaders: [
-          "Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self' 'https://mgr-dev.tech' 'unsafe-inline';",
+          "Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self' https://mgr-dev.tech 'unsafe-inline';",
           'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload',
           'Permissions-Policy: geolocation=(), midi=(), notifications=(), push=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(), payment=()'
         ]
