@@ -29,7 +29,7 @@ const SimplifiedHeader = (props) => {
           ? <Link to='/'>
             <Button
               variant='contained'
-              color='secondary'
+              color='tertiary'
               size='small'
               className={button}
             >
