@@ -1,15 +1,17 @@
 
 <p align="center">
-    <img alt="Pokedex" src="https://www.nicepng.com/png/detail/228-2285786_pokedex-kanto-pokedex-de-kanto.png" width="300" />
+    <img alt="Gatsby" src="https://www.nicepng.com/png/detail/228-2285786_pokedex-kanto-pokedex-de-kanto.png" width="300" />
   </a>
 </p>
 <h1 align="center">
   Gatsby Pokedex Project
 </h1>
 
+<h3>View live project at <a href="https://mgr-dev.tech/">https://mgr-dev.tech/
+
 ## Get started
 
-1.  **Clone the repo**
+ -  **Clone the repo**
 
     Clone the repo using git clone from the command line
 
@@ -18,7 +20,7 @@
     git clone git@github.com:mgallagher56/pokedexchallenge.git
     ```
 
-2.  **Install dependencies**
+ -  **Install dependencies**
 
     Navigate into your new repo’s directory and install the gatsby cli  and  dependencies via npm.
     
@@ -28,7 +30,7 @@
     npm install -g gatsby-cli
     npm install
     ```
-3.  **Set up environment variables**
+ -  **Set up environment variables**
 
     Create .env files in the root directory of your project: one for development and one for production.
      
@@ -40,7 +42,7 @@
     Populate each your site url:
     URL=https://yoursite.com
     
-4.  **Start development environment**
+ -  **Start development environment**
 
     Start up the gatsby development server
 
@@ -53,11 +55,11 @@
     npm run develop
     ```
     
-5.  **Open the code and start customizing!**
+ -  **Open the code and start customizing!**
 
     The project is now running and can be viewed at http://localhost:8000!
 
-6.  **Serve the production build of your site for testing**
+ -  **Serve the production build of your site for testing**
 	Stop the development server if it's still running.
 	
 	gatsby build creates a production build of your site and outputs the built static files into the `public` directory.
@@ -77,3 +79,39 @@
 	 **More info on using Gatsby**
 
     For more information on working with Gatsby, view their docs [here](https://www.gatsbyjs.com/docs/)
+
+	**Project Dependecies**
+	@material-ui/core
+	@material-ui/lab
+	dotenv
+	gatsby
+	gatsby-plugin-gatsby-cloud
+	gatsby-plugin-image
+	gatsby-plugin-manifest
+	gatsby-plugin-material-ui
+	gatsby-plugin-offline
+	gatsby-plugin-react-helmet
+	gatsby-plugin-sharp
+	gatsby-plugin-sitemap
+	gatsby-source-filesystem
+	gatsby-theme-material-ui
+	gatsby-transformer-sharp
+	react
+	react-dom
+	react-helmet
+	use-debounce
+
+	**Dev Dependencies**
+	@testing-library/cypress
+	axe-core
+	babel-jest
+	babel-preset-gatsby
+	cypress
+	cypress-axe
+	identity-obj-proxy
+	jest
+	postcss
+	react-test-renderer
+	start-server-and-test
+	trim
+	trim-newlines

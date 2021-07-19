@@ -37,9 +37,8 @@ module.exports = {
         }
       }
     },
-    // transform images to enable use by Gatsby Image
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp', //  enables images to be used by Gatsby Image
+    'gatsby-transformer-sharp', //  enables images to be used by Gatsby Image
     {
       resolve: 'gatsby-source-filesystem', // enables use of local images in queries
       options: {
