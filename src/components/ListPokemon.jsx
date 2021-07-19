@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-// query
 const ListPokemon = () => {
+  // query
   const data = useStaticQuery(graphql`
   query PokemonQuery {
     allPokemon(limit: 151) {
