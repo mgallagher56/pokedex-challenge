@@ -48,7 +48,7 @@ const ListPokemon = () => {
           childImageSharp {
             gatsbyImageData(
               width: 125
-              formats: [WEBP, AVIF, AUTO]
+              formats: [AVIF, WEBP, AUTO]
               placeholder: TRACED_SVG
               tracedSVGOptions: {background: "#1B8FD3", color: "#FF6F58"}
             )
