@@ -81,37 +81,37 @@
     For more information on working with Gatsby, view their docs [here](https://www.gatsbyjs.com/docs/)
 
 	**Project Dependecies**
-	@material-ui/core
-	@material-ui/lab
-	dotenv
-	gatsby
-	gatsby-plugin-gatsby-cloud
-	gatsby-plugin-image
-	gatsby-plugin-manifest
-	gatsby-plugin-material-ui
-	gatsby-plugin-offline
-	gatsby-plugin-react-helmet
-	gatsby-plugin-sharp
-	gatsby-plugin-sitemap
-	gatsby-source-filesystem
-	gatsby-theme-material-ui
-	gatsby-transformer-sharp
-	react
-	react-dom
-	react-helmet
-	use-debounce
+	- @material-ui/core
+	-  @material-ui/lab
+	- dotenv
+	- gatsby
+	- gatsby-plugin-gatsby-cloud
+	- gatsby-plugin-image
+	- gatsby-plugin-manifest
+	- gatsby-plugin-material-ui
+	- gatsby-plugin-offline
+	- gatsby-plugin-react-helmet
+	- gatsby-plugin-sharp
+	- gatsby-plugin-sitemap
+	- gatsby-source-filesystem
+	- gatsby-theme-material-ui
+	- gatsby-transformer-sharp
+	- react
+	- react-dom
+	- react-helmet
+	- use-debounce
 
 	**Dev Dependencies**
-	@testing-library/cypress
-	axe-core
-	babel-jest
-	babel-preset-gatsby
-	cypress
-	cypress-axe
-	identity-obj-proxy
-	jest
-	postcss
-	react-test-renderer
-	start-server-and-test
-	trim
-	trim-newlines
+	- @testing-library/cypress
+	- axe-core
+	- babel-jest
+	- babel-preset-gatsby
+	- cypress
+	- cypress-axe
+	- identity-obj-proxy
+	- jest
+	- postcss
+	- react-test-renderer
+	- start-server-and-test
+	- trim
+	- trim-newlines
