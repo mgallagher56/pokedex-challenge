@@ -51,7 +51,7 @@ const PokemonDetailCard = (props) => {
             alt={props.title}
           />}
       <CardContent className={cardContent}>
-        <Typography variant='h5' component='h5' className={cardTitle}>
+        <Typography variant='h5' component='h2' className={cardTitle}>
           {props.title}
         </Typography>
         <Typography variant='body1' component='p'>
