@@ -27,10 +27,10 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'Pokedex Challenge',
-        theme_color: '#CD5241',
-        background_color: '#EEDE7B',
-        icon: 'src/images/icon.png',
+        name: 'Pokedex',
+        theme_color: '#DC092D',
+        background_color: '#FDF0D5',
+        icon: 'src/images/pokedex-icon.png',
         display: 'standalone',
         icon_options: {
           purpose: 'any maskable'
