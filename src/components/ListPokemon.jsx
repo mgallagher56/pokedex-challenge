@@ -87,7 +87,7 @@ const ListPokemon = () => {
 
   const searchPokemon = (searchValue) => {
     return allPokemon.filter((pokemon) => {
-      if (pokemon.name.includes(searchValue)) {
+      if (pokemon.name.includes(searchValue.toLowerCase())) {
         return pokemon
       }
       return null
