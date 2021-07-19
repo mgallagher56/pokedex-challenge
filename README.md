@@ -1,54 +1,79 @@
+
 <p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
+    <img alt="Pokedex" src="https://www.nicepng.com/png/detail/228-2285786_pokedex-kanto-pokedex-de-kanto.png" width="300" />
   </a>
 </p>
 <h1 align="center">
-  Gatsby minimal starter
+  Gatsby Pokedex Project
 </h1>
 
-## 🚀 Quick start
+## Get started
 
-1.  **Create a Gatsby site.**
+1.  **Clone the repo**
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+    Clone the repo using git clone from the command line
 
     ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
+    # clone github repo
+    git clone git@github.com:mgallagher56/pokedexchallenge.git
     ```
 
-2.  **Start developing.**
+2.  **Install dependencies**
 
-    Navigate into your new site’s directory and start it up.
+    Navigate into your new repo’s directory and install the gatsby cli  and  dependencies via npm.
+    
+    If you need to install npm, you can find instructions [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
     ```shell
-    cd my-gatsby-site/
+    npm install -g gatsby-cli
+    npm install
+    ```
+3.  **Set up environment variables**
+
+    Create .env files in the root directory of your project: one for development and one for production.
+     
+
+    ```shell
+    touch .env.development
+    touch .env.production
+    ```
+    Populate each your site url:
+    URL=https://yoursite.com
+    
+4.  **Start development environment**
+
+    Start up the gatsby development server
+
+    ```shell
+    gatsby develop
+    ```
+    If you weren’t able to install the Gatsby command line interface globally, you can start your development server using the following command instead:
+    
+    ```shell
     npm run develop
     ```
+    
+5.  **Open the code and start customizing!**
 
-3.  **Open the code and start customizing!**
+    The project is now running and can be viewed at http://localhost:8000!
 
-    Your site is now running at http://localhost:8000!
+6.  **Serve the production build of your site for testing**
+	Stop the development server if it's still running.
+	
+	gatsby build creates a production build of your site and outputs the built static files into the `public` directory.
+	
+     ```shell
+    gatsby build
+    # if you didn't install gatsby cli
+    npm run build
+    ```
+    gatsby serve starts the production sever. You can now view your site at http://localhost:9000.
+    ``` shell
+    gatsby serve
+    # if you didn't install gatsby cli
+    npm run serve
+    ```
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+	 **More info on using Gatsby**
 
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+    For more information on working with Gatsby, view their docs [here](https://www.gatsbyjs.com/docs/)
