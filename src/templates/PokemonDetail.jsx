@@ -6,7 +6,11 @@ import Seo from '../components/Seo'
 import { Container } from '@material-ui/core'
 import PokemonDetailCard from '../components/PokemonDetailCard'
 import SimplifiedHeader from '../components/SimpleHeader'
-
+/**
+ * PokemonDetail provides a page template to render
+ *
+ * a new Pokemon page via Gatsby createPage API in gatsby-node.js
+ */
 const PokemonDetail = ({ data }) => {
   const { name, remoteImage, image, description, pokemonNumber } = data.allPokemon.nodes[0]
   const gatsbyImg = getImage(remoteImage)

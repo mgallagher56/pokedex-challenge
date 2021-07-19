@@ -45,7 +45,25 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+/**
+ * PokemonCard renders a linked card component
+ *
+ * Props:
+ *
+ * link - adds a link to whole card component
+ *
+ * title - adds title to card
+ *
+ * description - add a paragraph to provide further detail
+ *
+ * gatsbyImg - adds gatbsy image object for responsive images
+ *
+ * fallbackImg - adds a fallback image to render if gatsby image object fails
+ *
+ * btnText - adds button to card and populates with text
+ */
 const PokemonCard = (props) => {
+  // destructure styles for increased legibility
   const {
     card,
     cardTitle,
@@ -54,6 +72,7 @@ const PokemonCard = (props) => {
     cardActions
   } = useStyles()
 
+  // markup
   return (
     <Link to={props.link}>
       <Card className={card}>

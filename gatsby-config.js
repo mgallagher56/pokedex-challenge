@@ -10,9 +10,9 @@ module.exports = {
     lang: 'en'
   },
   plugins: [
-    'gatsby-plugin-material-ui',
+    'gatsby-plugin-material-ui', // provide styled component library for quick prototying
     {
-      resolve: 'gatsby-plugin-gatsby-cloud',
+      resolve: 'gatsby-plugin-gatsby-cloud', // provides compatibility and options for gatsby cloud hosting
       options: {
         allPageHeaders: [
           "Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self' 'https://mgr-dev.tech' 'unsafe-inline';",
@@ -21,11 +21,11 @@ module.exports = {
         ]
       }
     },
-    'gatsby-plugin-image',
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sitemap',
+    'gatsby-plugin-image', // provides support for automatic responsive images
+    'gatsby-plugin-react-helmet', // provides support for rendering metadata in head tag
+    'gatsby-plugin-sitemap', // provides support for automatic responsive images
     {
-      resolve: 'gatsby-plugin-manifest',
+      resolve: 'gatsby-plugin-manifest', // provide manifest information for PWA functionalty
       options: {
         name: 'Pokedex',
         theme_color: '#DC092D',
@@ -37,16 +37,17 @@ module.exports = {
         }
       }
     },
+    // transform images to enable use by Gatsby Image
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: 'gatsby-source-filesystem', // enables use of local images in queries
       options: {
         name: 'images',
         path: './src/images/'
       },
       __key: 'images'
     },
-    'gatsby-plugin-offline'
+    'gatsby-plugin-offline' // provide offline support for PWA functionalty
   ]
 }
