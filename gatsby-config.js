@@ -10,43 +10,48 @@ module.exports = {
     lang: 'en'
   },
   plugins: [
-    'gatsby-plugin-material-ui',
+    'gatsby-plugin-material-ui', // provide styled component library for quick prototying
     {
-      resolve: 'gatsby-plugin-gatsby-cloud',
+      resolve: 'gatsby-plugin-gatsby-cloud', // provides compatibility and options for gatsby cloud hosting
       options: {
         allPageHeaders: [
-          'Cache-Control: max-age=31536000',
+          "Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self' 'https://mgr-dev.tech' 'unsafe-inline';",
+          'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload',
           'Permissions-Policy: geolocation=(), midi=(), notifications=(), push=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(), payment=()'
-        ],
-        mergeCachingHeaders: true
+        ]
       }
     },
-    'gatsby-plugin-image',
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sitemap',
+    'gatsby-plugin-image', // provides support for automatic responsive images
+    'gatsby-plugin-react-helmet', // provides support for rendering metadata in head tag
+    'gatsby-plugin-sitemap', // provides support for automatic responsive images
     {
-      resolve: 'gatsby-plugin-manifest',
+      resolve: 'gatsby-plugin-manifest', // provide manifest information for PWA functionalty
       options: {
-        name: 'Pokedex Challenge',
-        theme_color: '#CD5241',
-        background_color: '#EEDE7B',
-        icon: 'src/images/icon.png',
+        name: 'Pokedex',
+        theme_color: '#002984',
+        background_color: '#FDF0D5',
+        icon: 'src/images/pokedex-icon.png',
         display: 'standalone',
         icon_options: {
           purpose: 'any maskable'
         }
       }
     },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp', //  enables images to be used by Gatsby Image
+    'gatsby-transformer-sharp', //  enables images to be used by Gatsby Image
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: 'gatsby-source-filesystem', // enables use of local images in queries
       options: {
         name: 'images',
         path: './src/images/'
       },
       __key: 'images'
     },
-    'gatsby-plugin-offline'
+    {
+      resolve: 'gatsby-plugin-offline', // provide offline support for PWA functionalty
+      options: {
+        precachePages: ['/pokemon/*']
+      }
+    }
   ]
 }

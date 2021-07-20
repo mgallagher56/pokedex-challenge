@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { AppBar, Button, Toolbar, Typography } from '@material-ui/core'
 
+// styles
 const useStyles = makeStyles((theme) => ({
   appBar: {
     width: '100%',
@@ -19,6 +20,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+/**
+ * SimplifiedHeader renders a page header
+ *
+ * Props:
+ *
+ * title - adds page title to header
+ */
+
+// markup
 const SimplifiedHeader = (props) => {
   const { appBar, title, button } = useStyles()
 
@@ -29,7 +39,7 @@ const SimplifiedHeader = (props) => {
           ? <Link to='/'>
             <Button
               variant='contained'
-              color='secondary'
+              color='tertiary'
               size='small'
               className={button}
             >

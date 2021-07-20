@@ -2,6 +2,7 @@ const fetch = require('node-fetch')
 const { createRemoteFileNode } = require('gatsby-source-filesystem')
 const path = require('path')
 
+// creates new local nodes from fetched data in graphql
 exports.sourceNodes = async ({
   actions,
   createNodeId,
@@ -9,12 +10,12 @@ exports.sourceNodes = async ({
 }) => {
   const NODE_TYPE = 'Pokemon'
 
-  const response = await FetchPaginatedPokemon()
+  const response = await getPokemonData()
   response.forEach(page => {
     page.results.forEach(pokemon => {
       actions.createNode({
         ...pokemon,
-        id: createNodeId(`${NODE_TYPE}-${pokemon.id}`),
+        id: createNodeId(`${NODE_TYPE}-${pokemon.pokemonNumber}`),
         parent: null,
         children: [],
         internal: {
@@ -26,6 +27,8 @@ exports.sourceNodes = async ({
   })
 }
 
+// creates local copies of external images from fetched data
+// to use with Gatsby Image
 exports.onCreateNode = async ({
   node,
   actions: { createNode },
@@ -49,9 +52,11 @@ exports.onCreateNode = async ({
   }
 }
 
+// programatically creates pages from graphql query.
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage, createRedirect } = actions
 
+  // sets redirect from /pokemon to index
   createRedirect({
     fromPath: '/pokemon/',
     toPath: '/',
@@ -60,7 +65,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 
   const PageTemplate = path.resolve('./src/templates/PokemonDetail.jsx')
-
   const result = await graphql(
     `
       query pokemonList {
@@ -90,40 +94,56 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 }
 
-const FetchPaginatedPokemon = async (pokemonPerPage = 20, pageQuantity = 15) => {
+// nested fetch requests to pull data from pokemon api
+// specific to data structure of pokemon api
+const getPokemonData = async (pokemonPerPage = 20, pageQuantity = 15) => {
   const pokeArr = []
-  let offset = 0
-  let url = `https://pokeapi.co/api/v2/pokemon?limit=${pokemonPerPage}&offset=${offset}`
+  let url = `https://pokeapi.co/api/v2/pokemon?limit=${pokemonPerPage}&offset=0`
+
+  // loop to get pokemon data as paginated results
   for (let i = 0; i < pageQuantity; i++) {
+    // fetch all pokemon
     await asyncFetch(url)
+
+      // fetch detailed info on each pokemon
       .then(allPokemon => {
         allPokemon.results.forEach(pokemon => {
           asyncFetch(pokemon.url)
+
+            // fetch species info on each pokemon
+            // to retireve nested description
             .then(pokemonDetail => {
               asyncFetch(pokemonDetail.species.url)
+
+                // update pokemon object to add custom information
                 .then(species => {
                   pokemon.pokemonNumber = pokemonDetail.id
-                  pokemon.id = pokemonDetail.id
                   pokemon.image = pokemonDetail.sprites.other['official-artwork'].front_default
 
-                  if (species.flavor_text_entries[0].language.name === 'en') {
-                    pokemon.description = species.flavor_text_entries[0].flavor_text
-                  } else if (species.flavor_text_entries[1].language.name === 'en') {
-                    pokemon.description = species.flavor_text_entries[1].flavour_text
-                  } else {
-                    pokemon.description = species.flavor_text_entries[2].flavorr_text
+                  // flavour_text_entries are descriptions in multiple different languages.
+                  // The loop is needed to check for the language we want
+                  const textEntries = species.flavor_text_entries.length
+                  for (let i = 0; i < textEntries; i++) {
+                    if (species.flavor_text_entries[i].language.name === 'en') {
+                      pokemon.description = species.flavor_text_entries[i].flavor_text
+                    }
                   }
                 })
             })
         })
+
+        // add updated pokemon objects to array
         pokeArr.push(allPokemon)
+
+        // get fetch url for next page of pokemon
         url = allPokemon.next
       }).catch(err => { console.error(err) })
-    offset += pokemonPerPage
   }
+  // return list of paginated
   return pokeArr
 }
 
+// helper function to make getPokemonData function more readable
 async function asyncFetch(url) {
   let result = await fetch(url)
   result = result.json()

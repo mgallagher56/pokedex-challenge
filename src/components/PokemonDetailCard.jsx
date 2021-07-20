@@ -26,7 +26,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+/**
+ * PokemonDetailCard renders a card component to display pokemon info
+ *
+ * Props:
+ *
+ * title - adds title to card
+ *
+ * description - add a paragraph to provide further detail
+ *
+ * gatsbyImg - adds gatbsy image object for responsive images
+ *
+ * fallbackImg - adds a fallback image to render if gatsby image object fails
+ *
+ * id - adds id of pokemon
+ */
 const PokemonDetailCard = (props) => {
+  // destructure styles for increased legibility
   const {
     card,
     cardTitle,
@@ -34,6 +50,7 @@ const PokemonDetailCard = (props) => {
     cardContent
   } = useStyles()
 
+  // markup
   return (
     <Card className={card}>
       {props.gatsbyImg
@@ -51,7 +68,7 @@ const PokemonDetailCard = (props) => {
             alt={props.title}
           />}
       <CardContent className={cardContent}>
-        <Typography variant='h5' component='h5' className={cardTitle}>
+        <Typography variant='h5' component='h2' className={cardTitle}>
           {props.title}
         </Typography>
         <Typography variant='body1' component='p'>

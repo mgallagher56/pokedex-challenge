@@ -2,6 +2,21 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
+/**
+ * Seo provides a component for outputting metadata tags in the
+ *
+ * HTML head element using react helmet.
+ *
+ * Falls back to site default meta if none provided
+ *
+ * Props:
+ *
+ * lang - adds language attribute to html tag
+ *
+ * title - adds title element
+ *
+ * metaDescruption - adds a description of the webpage
+ */
 const Seo = (props) => {
   const { site } = useStaticQuery(
     graphql`
@@ -19,6 +34,7 @@ const Seo = (props) => {
 
   const defaultTitle = site.siteMetadata?.title
 
+  // markup
   return (
     <Helmet
       htmlAttributes={{ lang: props.lang || site.siteMetadata.lang }}
