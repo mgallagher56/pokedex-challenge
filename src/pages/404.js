@@ -6,37 +6,30 @@ import SimplifiedHeader from '../components/SimpleHeader'
 // styles
 const pageStyles = {
   color: '#232129',
-  padding: '96px',
   fontFamily: '-apple-system, Roboto, sans-serif, serif'
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320
 }
 
 const paragraphStyles = {
-  marginBottom: 48
+  marginBottom: 24
 }
 
 // markup
 const NotFoundPage = () => {
   return (
     <main style={pageStyles}>
-      <SimplifiedHeader title='404' />
+      <SimplifiedHeader title='404 Page not found' />
       <title>Not found</title>
-      <h1 style={headingStyles}>Page not found</h1>
       <p style={paragraphStyles}>
         Looks like you've taken a wrong turn
         <span role='img' aria-label='Pensive emoji'>
           😔
         </span>{' '}
-        <Link to='/'>
-          <Button variant='contained' color='secondary'>
-            See some Pokemon
-          </Button>
-        </Link>
       </p>
+      <Link to='/'>
+        <Button variant='contained' color='secondary'>
+          Click here to see Pokemon
+        </Button>
+      </Link>
     </main>
   )
 }
