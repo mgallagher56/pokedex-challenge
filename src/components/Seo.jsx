@@ -39,7 +39,9 @@ const Seo = (props) => {
     <Helmet
       htmlAttributes={{ lang: props.lang || site.siteMetadata.lang }}
       title={props.title || site.siteMetadata.title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
+      titleTemplate={props.title
+        ? `${props.title.replace(/\w/, firstLetter => firstLetter.toUpperCase())} | ${defaultTitle}`
+        : `${defaultTitle}`}
       meta={[
         {
           name: 'description',

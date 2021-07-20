@@ -17,7 +17,7 @@ const PokemonDetail = ({ data }) => {
 
   return (
     <main>
-      <Seo />
+      <Seo title={name}/>
       <SimplifiedHeader title={name} btnText='See all Pokemon' />
       <Container maxWidth='md'>
         <PokemonDetailCard
