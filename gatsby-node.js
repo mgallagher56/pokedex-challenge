@@ -105,30 +105,28 @@ const getPokemonData = async (pokemonPerPage = 20, pageQuantity = 15) => {
     // fetch all pokemon
     await asyncFetch(url)
 
-    // fetch detailed info on each pokemon
+      // fetch detailed info on each pokemon
       .then(allPokemon => {
         allPokemon.results.forEach(pokemon => {
           asyncFetch(pokemon.url)
 
-          // fetch species info on each pokemon
-          // to retireve description
+            // fetch species info on each pokemon
+            // to retireve nested description
             .then(pokemonDetail => {
               asyncFetch(pokemonDetail.species.url)
 
-              // update pokemon object to add custom information
+                // update pokemon object to add custom information
                 .then(species => {
                   pokemon.pokemonNumber = pokemonDetail.id
                   pokemon.image = pokemonDetail.sprites.other['official-artwork'].front_default
 
-                  // flavour_text_entries are descriptions in different languages.
-                  // english is usually one of first 3 options.
-                  // NB. there could be exceptions
-                  if (species.flavor_text_entries[0].language.name === 'en') {
-                    pokemon.description = species.flavor_text_entries[0].flavor_text
-                  } else if (species.flavor_text_entries[1].language.name === 'en') {
-                    pokemon.description = species.flavor_text_entries[1].flavour_text
-                  } else {
-                    pokemon.description = species.flavor_text_entries[2].flavorr_text
+                  // flavour_text_entries are descriptions in multiple different languages.
+                  // The loop is needed to check for the language we want
+                  const textEntries = species.flavor_text_entries.length
+                  for (let i = 0; i < textEntries; i++) {
+                    if (species.flavor_text_entries[i].language.name === 'en') {
+                      pokemon.description = species.flavor_text_entries[i].flavor_text
+                    }
                   }
                 })
             })
@@ -146,7 +144,7 @@ const getPokemonData = async (pokemonPerPage = 20, pageQuantity = 15) => {
 }
 
 // helper function to make getPokemonData function more readable
-async function asyncFetch (url) {
+async function asyncFetch(url) {
   let result = await fetch(url)
   result = result.json()
   return result
