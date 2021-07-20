@@ -28,7 +28,7 @@ module.exports = {
       resolve: 'gatsby-plugin-manifest', // provide manifest information for PWA functionalty
       options: {
         name: 'Pokedex',
-        theme_color: '#DC092D',
+        theme_color: '#002984',
         background_color: '#FDF0D5',
         icon: 'src/images/pokedex-icon.png',
         display: 'standalone',
@@ -47,6 +47,11 @@ module.exports = {
       },
       __key: 'images'
     },
-    'gatsby-plugin-offline' // provide offline support for PWA functionalty
+    {
+      resolve: 'gatsby-plugin-offline', // provide offline support for PWA functionalty
+      options: {
+        precachePages: ['/pokemon/*']
+      }
+    }
   ]
 }
