@@ -23,7 +23,7 @@ module.exports = (on, config) => {
   })
 
   on('task', {
-    lighthouse: lighthouse(),
-    pa11y: pa11y()
+    // lighthouse: lighthouse(),
+    // pa11y: pa11y()
   })
 }
