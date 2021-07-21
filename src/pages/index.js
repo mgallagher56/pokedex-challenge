@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Seo from '../components/Seo'
 import ListPokemonData from '../components/ListPokemon'
-import SimplifiedHeader from '../components/SimpleHeader'
+import SimpleHeader from '../components/SimpleHeader/SimpleHeader'
 import { useStaticQuery, graphql } from 'gatsby'
 
 const IndexPage = () => {
@@ -33,7 +33,7 @@ const IndexPage = () => {
   return (
     <main>
       <Seo />
-      <SimplifiedHeader title='Pokedex' />
+      <SimpleHeader title='Pokedex' />
       <ListPokemonData itemsPerPage={20} data={allPokemon} />
     </main>
   )

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 /**
- * SimplifiedHeader renders a page header
+ * SimpleHeader renders a page header
  *
  * Props:
  *
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
  */
 
 // markup
-const SimplifiedHeader = (props) => {
+const SimpleHeader = (props) => {
   const { appBar, title, button } = useStyles()
 
   return (
@@ -55,4 +55,4 @@ const SimplifiedHeader = (props) => {
   )
 }
 
-export default SimplifiedHeader
+export default SimpleHeader

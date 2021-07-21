@@ -75,7 +75,7 @@ const PokemonCard = (props) => {
   // markup
   return (
     <Link to={props.link}>
-      <Card className={card}>
+      <Card className={`${card} pokemon-card`}>
         {props.gatsbyImg
           ? <GatsbyImage
               objectFit='contain'
@@ -90,7 +90,7 @@ const PokemonCard = (props) => {
               title={props.title}
               alt={props.title}
             />}
-        <CardContent className={cardContent}>
+        <CardContent className={`${cardContent} card-content`}>
           <Typography variant='h5' component='h2' className={cardTitle}>
             {props.title}
           </Typography>

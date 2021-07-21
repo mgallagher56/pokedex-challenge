@@ -1,4 +1,5 @@
 module.exports = {
+  setupFiles: ['@testing-library/react/dont-cleanup-after-each'],
   transform: {
     '^.+\\.jsx?$': '<rootDir>/jest-preprocess.js'
   },
@@ -12,5 +13,11 @@ module.exports = {
     __PATH_PREFIX__: ''
   },
   testURL: 'http://localhost:8000',
-  setupFiles: ['<rootDir>/loadershim.js']
+  setupFiles: ['<rootDir>/loadershim.js'],
+  moduleDirectories: [
+    'node_modules',
+    'utils',
+    __dirname
+  ],
+
 }

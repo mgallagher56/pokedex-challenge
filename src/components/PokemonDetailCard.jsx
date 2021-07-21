@@ -52,7 +52,7 @@ const PokemonDetailCard = (props) => {
 
   // markup
   return (
-    <Card className={card}>
+    <Card className={`${card} pokemon-detail-card`}>
       {props.gatsbyImg
         ? <GatsbyImage
             objectFit='contain'
