@@ -1,5 +1,5 @@
 describe('Lighthouse', () => {
-  it('should run performance audits using custom thresholds', () => {
+  it.skip('should run performance audits using custom thresholds', () => {
     const customThresholds = {
       performance: 90,
       accessibility: 90,

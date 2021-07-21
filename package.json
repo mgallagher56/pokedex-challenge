@@ -15,7 +15,8 @@
     "clean": "gatsby clean",
     "test": "jest",
     "cy:open": "cypress open",
-    "test:e2e": "start-server-and-test develop http://localhost:8000 cy:open"
+    "cy:run": "cypress run --record",
+    "server-start": "start-server-and-test serve http://localhost:9001 cy:run"
   },
   "dependencies": {
     "@material-ui/core": "latest",
