@@ -40,7 +40,7 @@ describe('pokemon listing app', () => {
     cy.get('.pokemon-card').first().click()
     cy.wait(1000)
     cy.get('button').click()
-    cy.url().should('eq', 'http://localhost:9001/')
+    cy.url().should('eq', 'http://localhost:9000/')
   })
 
   // tests pagination
