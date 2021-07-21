@@ -148,7 +148,7 @@ const ListPokemon = (props) => {
     if (searchValue === '') {
       resetCards()
       // reset search value when pressing button to clear
-      document.getElementById('pokemon-search').value = ''
+      document.getElementById('search-bar').value = ''
     } else {
       const filteredItemsArr = filterItemsByName(data, 'name', searchValue)
 
@@ -187,8 +187,8 @@ const ListPokemon = (props) => {
   return (
     <Container className={cardGrid} maxWidth='md'>
       <TextField
-        id='pokemon-search'
-        className={input}
+        id='search-bar'
+        className={`${input}`}
         label='Search Pokemon'
         type='search'
         onChange={(e) => debounced(e.target.value)}

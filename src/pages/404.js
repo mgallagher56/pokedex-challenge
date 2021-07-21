@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
 import { Button } from '@material-ui/core'
-import SimplifiedHeader from '../components/SimpleHeader'
+import SimpleHeader from '../components/SimpleHeader/SimpleHeader'
 
 // styles
 const pageStyles = {
@@ -17,7 +17,7 @@ const paragraphStyles = {
 const NotFoundPage = () => {
   return (
     <main style={pageStyles}>
-      <SimplifiedHeader title='404 Page not found' />
+      <SimpleHeader title='404 Page not found' />
       <title>Not found</title>
       <p style={paragraphStyles}>
         Looks like you've taken a wrong turn

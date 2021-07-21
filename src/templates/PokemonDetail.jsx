@@ -5,7 +5,7 @@ import { getImage } from 'gatsby-plugin-image'
 import Seo from '../components/Seo'
 import { Container } from '@material-ui/core'
 import PokemonDetailCard from '../components/PokemonDetailCard'
-import SimplifiedHeader from '../components/SimpleHeader'
+import SimpleHeader from '../components/SimpleHeader/SimpleHeader'
 /**
  * PokemonDetail provides a page template to render
  *
@@ -18,7 +18,7 @@ const PokemonDetail = ({ data }) => {
   return (
     <main>
       <Seo title={name}/>
-      <SimplifiedHeader title={name} btnText='See all Pokemon' />
+      <SimpleHeader title={name} btnText='See all Pokemon' />
       <Container maxWidth='md'>
         <PokemonDetailCard
           gatsbyImg={gatsbyImg}

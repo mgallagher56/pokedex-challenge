@@ -1,5 +1,4 @@
 import React from 'react'
-import { render } from '@testing-library/react'
 import { render, queries } from '@testing-library/react'
 import * as customQueries from '../custom-queries'
 import { ThemeProvider } from 'my-ui-lib'
