@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { getImage } from 'gatsby-plugin-image'
 import { useDebouncedCallback } from 'use-debounce'
 import { makeStyles } from '@material-ui/core/styles'
@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import { TextField } from '@material-ui/core'
 import Pagination from '@material-ui/lab/Pagination'
-import PokemonCard from './PokemonCard'
+import PokemonCard from './PokemonCard/PokemonCard'
 
 // styles
 const useStyles = makeStyles((theme) => ({

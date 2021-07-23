@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PokemonCard Component should take a snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <a
+      data-testid="pokemon-card-link"
+      href="/"
+    >
+      <div
+        class="MuiPaper-root MuiCard-root makeStyles-card-5 pokemon-card MuiPaper-elevation1 MuiPaper-rounded"
+      >
+        <img
+          class="MuiCardMedia-root makeStyles-cardMedia-7 MuiCardMedia-media MuiCardMedia-img"
+        />
+        <div
+          class="MuiCardContent-root makeStyles-cardContent-8 card-content"
+        />
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
