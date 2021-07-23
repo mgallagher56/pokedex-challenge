@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import { TextField } from '@material-ui/core'
 import Pagination from '@material-ui/lab/Pagination'
-import PokemonCard from './PokemonCard'
+import PokemonCard from './PokemonCard/PokemonCard'
 
 // styles
 const useStyles = makeStyles((theme) => ({
@@ -147,14 +147,11 @@ const ListPokemon = (props) => {
   const handleItemSearch = (searchValue) => {
     if (searchValue === '') {
       resetCards()
-      // reset search value when pressing button to clear
-      document.getElementById('search-bar').value = ''
     } else {
       const filteredItemsArr = filterItemsByName(data, 'name', searchValue)
 
       setState({
         ...state,
-        searchInput: searchValue,
         filteredItems: filteredItemsArr,
         totalPages: calculatePages(filteredItemsArr, itemsPerPage),
         currentPage: 1,
@@ -191,7 +188,14 @@ const ListPokemon = (props) => {
         className={`${input}`}
         label='Search Pokemon'
         type='search'
-        onChange={(e) => debounced(e.target.value)}
+        value={state.searchInput}
+        onChange={(e) => {
+          setState({
+            ...state,
+            searchInput: e.target.value
+          })
+          debounced(state.searchInput)
+        }}
       />
       {/* show dialog to reset searcg when no items found */
         state.itemsToShow.length === 0

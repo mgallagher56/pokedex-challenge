@@ -66,17 +66,24 @@ const PokemonDetailCard = (props) => {
             image={props.fallbackImg}
             title={props.title}
             alt={props.title}
+            component='img'
           />}
       <CardContent className={cardContent}>
-        <Typography variant='h5' component='h2' className={cardTitle}>
-          {props.title}
-        </Typography>
-        <Typography variant='body1' component='p'>
-          {props.description}
-        </Typography>
-        <Typography variant='body1' component='p'>
-          Pokemon No. {props.id}
-        </Typography>
+        {props.title
+          ? <Typography data-testid='pokemon-detail-card-title' variant='h5' component='h2' className={cardTitle}>
+            {props.title}
+          </Typography>
+          : null}
+        {props.description
+          ? <Typography data-testid='pokemon-detail-card-description' variant='body1' component='p'>
+            {props.description}
+          </Typography>
+          : null}
+        {props.fallbackImg
+          ? <Typography data-testid='pokemon-detail-card-id' variant='body1' component='p'>
+            Pokemon No. {props.id}
+          </Typography>
+          : null}
       </CardContent>
     </Card>
   )

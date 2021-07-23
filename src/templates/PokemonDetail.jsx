@@ -4,7 +4,7 @@ import { getImage } from 'gatsby-plugin-image'
 
 import Seo from '../components/Seo'
 import { Container } from '@material-ui/core'
-import PokemonDetailCard from '../components/PokemonDetailCard'
+import PokemonDetailCard from '../components/PokemonDetailCard/PokemonDetailCard'
 import SimpleHeader from '../components/SimpleHeader/SimpleHeader'
 /**
  * PokemonDetail provides a page template to render

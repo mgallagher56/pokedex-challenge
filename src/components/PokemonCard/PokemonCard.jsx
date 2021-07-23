@@ -74,37 +74,47 @@ const PokemonCard = (props) => {
 
   // markup
   return (
-    <Link to={props.link}>
-      <Card className={`${card} pokemon-card`}>
-        {props.gatsbyImg
-          ? <GatsbyImage
-              objectFit='contain'
-              className={cardMedia}
-              image={props.gatsbyImg}
-              title={props.title}
-              alt={props.title}
-            />
-          : <CardMedia
-              className={cardMedia}
-              image={props.fallbackImg}
-              title={props.title}
-              alt={props.title}
-            />}
-        <CardContent className={`${cardContent} card-content`}>
-          <Typography variant='h5' component='h2' className={cardTitle}>
-            {props.title}
-          </Typography>
-          <Typography variant='body1' component='p'>
-            {props.description}
-          </Typography>
-        </CardContent>
-        {props.btnText
-          ? <CardActions className={cardActions}>
-              <Button color='primary'>{props.btnText}</Button>
-            </CardActions>
-          : null}
-      </Card>
-    </Link>
+    <div>
+      {props.link
+        ? <Link to={props.link || '/'} data-testid='pokemon-card-link'>
+          <Card className={`${card} pokemon-card`} src={props.gatsbyImg}>
+            {props.gatsbyImg
+              ? <GatsbyImage
+                  component='img'
+                  objectFit='contain'
+                  className={cardMedia}
+                  image={props.gatsbyImg}
+                  title={props.title}
+                  alt={props.title}
+                />
+              : <CardMedia
+                  className={cardMedia}
+                  image={props.fallbackImg}
+                  title={props.title}
+                  alt={props.title}
+                  component='img'
+                />}
+            <CardContent className={`${cardContent} card-content`}>
+              {props.title
+                ? <Typography data-testid='pokemon-card-title' variant='h5' component='h2' className={cardTitle}>
+                  {props.title}
+                </Typography>
+                : null}
+              {props.description
+                ? <Typography data-testid='pokemon-card-description' variant='body1' component='p'>
+                  {props.description}
+                </Typography>
+                : null}
+            </CardContent>
+            {props.btnText
+              ? <CardActions className={cardActions}>
+                <Button data-testid='pokemon-card-button' color='primary'>{props.btnText}</Button>
+              </CardActions>
+              : null}
+          </Card>
+        </Link>
+        : null}
+    </div>
   )
 }
 

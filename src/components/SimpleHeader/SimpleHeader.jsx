@@ -38,18 +38,25 @@ const SimpleHeader = (props) => {
         {props.btnText
           ? <Link to='/'>
             <Button
+              data-testid='header-button'
               variant='contained'
-              color='tertiary'
+              color='default'
               size='small'
               className={button}
             >
               {props.btnText}
             </Button>
-            </Link>
+          </Link>
           : null}
-        <Typography variant='h5' component='h1' className={title}>
-          {props.title}
-        </Typography>
+        {props.title
+          ? <Typography
+              data-testid='header-title'
+              variant='h5' component='h1'
+              className={title}
+            >
+            {props.title}
+          </Typography>
+          : null}
       </Toolbar>
     </AppBar>
   )
