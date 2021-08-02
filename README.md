@@ -7,7 +7,7 @@
   Gatsby Pokedex Project
 </h1>
 
-<h3>View live project at <a href="https://mgr-dev.tech/">https://mgr-dev.tech/
+<h3>View live project at <a href="https://mgr-dev.tech/">https://mgr-dev.tech/ </a>
 
 ## Get started
 
