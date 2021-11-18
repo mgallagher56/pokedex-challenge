@@ -194,7 +194,7 @@ const ListPokemon = (props) => {
             ...state,
             searchInput: e.target.value
           })
-          debounced(state.searchInput)
+          debounced(e.target.value)
         }}
       />
       {/* show dialog to reset searcg when no items found */
