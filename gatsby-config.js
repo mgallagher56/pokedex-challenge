@@ -4,10 +4,10 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: process.env.URL,
-    title: 'Marc\'s Pokedex',
+    siteUrl    : process.env.URL,
+    title      : 'Marc\'s Pokedex',
     description: 'A list of Pokemon and their information',
-    lang: 'en'
+    lang       : 'en'
   },
   plugins: [
     'gatsby-plugin-material-ui', // provide styled component library for quick prototying
@@ -27,12 +27,12 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest', // provide manifest information for PWA functionalty
       options: {
-        name: 'Pokedex',
-        theme_color: '#002984',
+        name            : 'Pokedex',
+        theme_color     : '#002984',
         background_color: '#FDF0D5',
-        icon: 'src/images/pokedex-icon.png',
-        display: 'standalone',
-        icon_options: {
+        icon            : 'src/images/pokedex-icon.png',
+        display         : 'standalone',
+        icon_options    : {
           purpose: 'any maskable'
         }
       }
@@ -48,7 +48,7 @@ module.exports = {
       __key: 'images'
     },
     {
-      resolve: 'gatsby-plugin-offline', // provide offline support for PWA functionalty
+      resolve: 'gatsby-plugin-offline',   // provide offline support for PWA functionalty
       options: {
         precachePages: ['/pokemon/*']
       }

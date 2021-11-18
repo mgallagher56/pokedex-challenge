@@ -15,22 +15,22 @@ import PokemonCard from './PokemonCard/PokemonCard'
 const useStyles = makeStyles((theme) => ({
   input: {
     marginBottom: theme.spacing(8),
-    width: '100%'
+    width       : '100%'
   },
   cardGrid: {
     paddingBottom: theme.spacing(8),
-    paddingTop: theme.spacing(8)
+    paddingTop   : theme.spacing(8)
   },
   pagination: {
-    display: 'flex',
+    display       : 'flex',
     justifyContent: 'center',
-    paddingBottom: theme.spacing(8),
-    paddingTop: theme.spacing(8)
+    paddingBottom : theme.spacing(8),
+    paddingTop    : theme.spacing(8)
   },
   searchError: {
-    textAlign: 'center',
+    textAlign    : 'center',
     paddingBottom: theme.spacing(2),
-    paddingTop: theme.spacing(2)
+    paddingTop   : theme.spacing(2)
   }
 }))
 
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 const ListPokemon = (props) => {
   // set initial variables to be used in component
   const { data, itemsPerPage } = props
-  const initialPagePokemon = data.slice(0, itemsPerPage)
+  const initialPagePokemon     = data.slice(0, itemsPerPage)
 
   /**
   * calculatePages calcultes total pages for given items and page size
@@ -67,11 +67,11 @@ const ListPokemon = (props) => {
 
   // set initial values for state object
   const [state, setState] = useState({
-    searchInput: '',
+    searchInput  : '',
     filteredItems: [],
-    totalPages: calculatePages(data, itemsPerPage),
-    currentPage: 1,
-    itemsToShow: initialPagePokemon
+    totalPages   : calculatePages(data, itemsPerPage),
+    currentPage  : 1,
+    itemsToShow  : initialPagePokemon
   })
 
   /**
@@ -79,11 +79,11 @@ const ListPokemon = (props) => {
   */
   const resetCards = () => {
     setState({
-      searchInput: '',
+      searchInput  : '',
       filteredItems: [],
-      totalPages: calculatePages(data, itemsPerPage),
-      currentPage: 1,
-      itemsToShow: initialPagePokemon
+      totalPages   : calculatePages(data, itemsPerPage),
+      currentPage  : 1,
+      itemsToShow  : initialPagePokemon
     })
   }
 
@@ -153,9 +153,9 @@ const ListPokemon = (props) => {
       setState({
         ...state,
         filteredItems: filteredItemsArr,
-        totalPages: calculatePages(filteredItemsArr, itemsPerPage),
-        currentPage: 1,
-        itemsToShow: filteredItemsArr.slice(0).slice(0, itemsPerPage)
+        totalPages   : calculatePages(filteredItemsArr, itemsPerPage),
+        currentPage  : 1,
+        itemsToShow  : filteredItemsArr.slice(0).slice(0, itemsPerPage)
       })
     }
   }

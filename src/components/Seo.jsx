@@ -44,24 +44,24 @@ const Seo = (props) => {
         : `${defaultTitle}`}
       meta={[
         {
-          name: 'description',
+          name   : 'description',
           content: props.metaDescription || site.siteMetadata.description
         },
         {
           property: 'og:title',
-          content: props.title || site.siteMetadata.title
+          content : props.title || site.siteMetadata.title
         },
         {
           property: 'og:description',
-          content: props.metaDescription || site.siteMetadata.description
+          content : props.metaDescription || site.siteMetadata.description
         },
         {
-          name: 'viewport',
+          name   : 'viewport',
           content: 'minimum-scale=1, initial-scale=1, width=device-width'
         },
         {
           property: 'og:type',
-          content: 'website'
+          content : 'website'
         }
       ]}
     />

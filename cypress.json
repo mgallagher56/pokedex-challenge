@@ -1,8 +1,8 @@
 {
-  "baseUrl": "http://localhost:9000/",
+  "baseUrl"          : "http://localhost:9000/",
   "integrationFolder": "cypress/integration/",
-  "taskTimeout": 3000,
-  "projectId": "e1nyum",
-  "video": false,
+  "taskTimeout"      : 3000,
+  "projectId"        : "e1nyum",
+  "video"            : false,
   "chromeWebSecurity": false
 }

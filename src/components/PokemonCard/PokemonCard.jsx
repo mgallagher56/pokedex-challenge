@@ -13,18 +13,18 @@ import { CardMedia } from '@material-ui/core'
 // styles
 const useStyles = makeStyles((theme) => ({
   card: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    transition: 'all .3s ease-out',
+    display           : 'flex',
+    flexDirection     : 'column',
+    height            : '100%',
+    transition        : 'all .3s ease-out',
     transitionProperty: 'box-shadow, transform',
-    '&:hover': {
+    '&:hover' : {
       boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
       transform: 'translate3d(0px, -2px, 0px)'
     },
     [theme.breakpoints.down('xs')]: {
       flexDirection: 'row',
-      maxHeight: '100px'
+      maxHeight    : '100px'
     }
   },
   cardTitle: {

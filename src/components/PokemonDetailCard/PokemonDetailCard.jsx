@@ -10,18 +10,18 @@ import { CardMedia } from '@material-ui/core'
 // styles
 const useStyles = makeStyles((theme) => ({
   card: {
-    display: 'flex',
+    display      : 'flex',
     flexDirection: 'column',
-    height: '100%',
-    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)'
+    height       : '100%',
+    boxShadow    : '0px 0px 10px rgba(0, 0, 0, 0.2)'
   },
   cardTitle: {
     textTransform: 'capitalize'
   },
   cardContent: {
-    flexGrow: 1,
-    display: 'flex',
-    alignItems: 'left',
+    flexGrow     : 1,
+    display      : 'flex',
+    alignItems   : 'left',
     flexDirection: 'column'
   }
 }))

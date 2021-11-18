@@ -5,7 +5,7 @@ import SimpleHeader from '../components/SimpleHeader/SimpleHeader'
 
 // styles
 const pageStyles = {
-  color: '#232129',
+  color     : '#232129',
   fontFamily: '-apple-system, Roboto, sans-serif, serif'
 }
 

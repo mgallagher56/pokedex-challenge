@@ -23,7 +23,7 @@
  -  **Install dependencies**
 
     Navigate into your new repo’s directory and install the gatsby cli  and  dependencies via npm.
-    
+
     If you need to install npm, you can find instructions [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
     ```shell
@@ -33,7 +33,7 @@
  -  **Set up environment variables**
 
     Create .env files in the root directory of your project: one for development and one for production.
-     
+
 
     ```shell
     touch .env.development
@@ -41,7 +41,7 @@
     ```
     Populate each your site url:
     URL=https://yoursite.com
-    
+
  -  **Start development environment**
 
     Start up the gatsby development server
@@ -50,20 +50,20 @@
     gatsby develop
     ```
     If you weren’t able to install the Gatsby command line interface globally, you can start your development server using the following command instead:
-    
+
     ```shell
     npm run develop
     ```
-    
+
  -  **Open the code and start customizing!**
 
     The project is now running and can be viewed at http://localhost:8000!
 
  -  **Serve the production build of your site for testing**
 	Stop the development server if it's still running.
-	
+
 	gatsby build creates a production build of your site and outputs the built static files into the `public` directory.
-	
+
      ```shell
     gatsby build
     # if you didn't install gatsby cli
