@@ -19,7 +19,7 @@ jobs:
           parallel: true
           browser: chrome
           build: npm run build
-          start: npm run server-start
+          start: npm run server-start-test-gh
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}

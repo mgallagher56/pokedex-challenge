@@ -8,15 +8,17 @@
     "gatsby"
   ],
   "scripts": {
-    "develop"          : "gatsby develop",
-    "start"            : "gatsby develop",
-    "build"            : "gatsby build",
-    "serve"            : "gatsby serve",
-    "clean"            : "gatsby clean",
-    "test"             : "jest -c jest.config.js --watch --env=jsdom",
-    "cy:open"          : "cypress open",
-    "cy:run"           : "cypress run",
-    "server-start-test": "start-server-and-test serve http://localhost:9000 cy:run"
+    "develop"             : "gatsby develop",
+    "start"               : "gatsby develop",
+    "build"               : "gatsby build",
+    "serve"               : "gatsby serve",
+    "clean"               : "gatsby clean",
+    "test"                : "jest -c jest.config.js --watch --env=jsdom",
+    "cy:open"             : "cypress open",
+    "cy:run"              : "cypress run",
+    "cy:run-gh"           : "cypress run --record",
+    "server-start-test"   : "start-server-and-test serve http://localhost:9000 cy:run",
+    "server-start-test-gh": "start-server-and-test serve http://localhost:9000 cy:run-gh"
   },
   "dependencies": {
     "@material-ui/core"         : "latest",
