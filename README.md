@@ -60,47 +60,54 @@
     The project is now running and can be viewed at http://localhost:8000!
 
  -  **Serve the production build of your site for testing**
+	
 	Stop the development server if it's still running.
 
 	gatsby build creates a production build of your site and outputs the built static files into the `public` directory.
 
      ```shell
     gatsby build
-    # if you didn't install gatsby cli
+    # or if you didn't install gatsby cli
     npm run build
     ```
     gatsby serve starts the production sever. You can now view your site at http://localhost:9000.
     ``` shell
     gatsby serve
-    # if you didn't install gatsby cli
+    # or if you didn't install gatsby cli
     npm run serve
     ```
 	
 ## Testing
 	
-    **Unit Testing**
+-  **Unit Testing**
+	
     Start test watcher. Test will be run as files are edited
+	
     ```shell
     npm run test
     ```
     Press 'a' while the test watcher is running to perform all available test
 	
-    **End-to-End Testing**
+-  **End-to-End Testing**
+	
     Start production server and open Cypress Test UI
+	
     ```shell
     npm run build && npm run serve && npm run cypress:open
     ```
     
     Start production server and Run Cypress test from command line
+	
     ```shell
     npm run build && npm run server-start
     ```
 	
 ## More info on using Gatsby
 
-    For more information on working with Gatsby, view their docs [here](https://www.gatsbyjs.com/docs/)
+For more information on working with Gatsby, view their docs at https://www.gatsbyjs.com/docs/
 
 ## Project Dependecies
+	
 	- @material-ui/core
 	- @material-ui/lab
 	- dotenv
@@ -121,7 +128,7 @@
 	- react-helmet
 	- use-debounce
 
-	**Dev Dependencies**
+	Dev Dependencies
 	- @testing-library/cypress
 	- @testing-library/jest-dom
 	- @testing-library/react"
