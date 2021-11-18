@@ -1,6 +1,6 @@
 
 <p align="center">
-    <img alt="Gatsby" src="https://www.nicepng.com/png/detail/228-2285786_pokedex-kanto-pokedex-de-kanto.png" width="300" />
+    <img alt="Pokedex" src="https://img.rankedboost.com/wp-content/uploads/2017/09/Pokemon-GO-GEN-4-Pokedex.png" width="300" />
   </a>
 </p>
 <h1 align="center">
