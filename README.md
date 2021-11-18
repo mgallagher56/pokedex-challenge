@@ -76,7 +76,7 @@
     npm run serve
     ```
 	
- -  **Testing**
+## Testing
 	
     **Unit Testing**
     Start test watcher. Test will be run as files are edited
@@ -96,13 +96,13 @@
     npm run build && npm run server-start
     ```
 	
-    **More info on using Gatsby**
+## More info on using Gatsby
 
     For more information on working with Gatsby, view their docs [here](https://www.gatsbyjs.com/docs/)
 
-	**Project Dependecies**
+## Project Dependecies
 	- @material-ui/core
-	-  @material-ui/lab
+	- @material-ui/lab
 	- dotenv
 	- gatsby
 	- gatsby-plugin-gatsby-cloud
@@ -123,10 +123,13 @@
 
 	**Dev Dependencies**
 	- @testing-library/cypress
+	- @testing-library/jest-dom
+	- @testing-library/react"
 	- axe-core
 	- babel-jest
 	- babel-preset-gatsby
 	- cypress
+	- cypress-audit
 	- cypress-axe
 	- identity-obj-proxy
 	- jest
