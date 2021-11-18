@@ -75,8 +75,28 @@
     # if you didn't install gatsby cli
     npm run serve
     ```
-
-	 **More info on using Gatsby**
+	
+ -  **Testing**
+	
+    **Unit Testing**
+    Start test watcher. Test will be run as files are edited
+    ```shell
+    npm run test
+    ```
+    Press 'a' while the test watcher is running to perform all available test
+	
+    **End-to-End Testing**
+    Start production server and open Cypress Test UI
+    ```shell
+    npm run build && npm run serve && npm run cypress:open
+    ```
+    
+    Start production server and Run Cypress test from command line
+    ```shell
+    npm run build && npm run server-start
+    ```
+	
+    **More info on using Gatsby**
 
     For more information on working with Gatsby, view their docs [here](https://www.gatsbyjs.com/docs/)
 
