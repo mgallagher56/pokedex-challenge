@@ -14,7 +14,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          name: End-to-end tests
           record: true
           parallel: true
           browser: chrome
